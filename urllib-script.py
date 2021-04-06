@@ -1,26 +1,22 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Apr  5 17:10:03 2021
-
-@author: Jerrika
-"""
-import urllib.request
-import urllib.parse #values to post request
+import urllib.request 
+import urllib.parse   #values to post request
 import re
 
-url = 'https://genius.com/Demi-lovato-met-him-last-night-lyrics'  # url to visit
+# cite url to visit and search f
+url = 'http://pythonprogramming.net'
 values = {'s':'basic', 
           'submit':'search'}  # dictionary used
 
-data = urllib.parse.urlencode(values)  #encode values
-data = data.encode('utf-8')   # type of coding
-req = urllib.request.Request(url,data)   #encode data
-resp = urllib.request.urlopen(req)   #request
+# encode values to specific code, request data, and read
+data = urllib.parse.urlencode(values) 
+data = data.encode('utf-8')   
+req = urllib.request.Request(url,data)
+resp = urllib.request.urlopen(req)
 respData = resp.read()                      
 
-#print(respData)
+#() is content we're looking for to identify
+paragraphs = re.findall(r'<br>(.*?)</br>',str(respData)) 
 
-paragraphs = re.findall(r'<br>(.*?)</br>',str(respData)) #() is content we're looking for to identify
- 
+# print data
 for eachP in paragraphs:
     print (eachP)
